@@ -1,5 +1,10 @@
 package com.matism.portfolio.model
 
-data class Project(val id: Long, val name: String) {
+import java.util.*
+
+data class Project(var name: String) {
+
+    var id: String = UUID.randomUUID().toString()
+    var description: String = ""
 
 }

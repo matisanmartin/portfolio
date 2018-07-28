@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository
 @Repository
 class ProjectRepository {
 
-    fun get(id: Long) =
-            Project(id, "Test")
+    fun get(id: String) =
+            Project("Test")
+
+    fun post(project: Project): Project {
+        return project
+    }
 }

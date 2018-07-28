@@ -16,15 +16,13 @@ class ProjectController @Autowired constructor(
 ){
 
     @GetMapping("{id}")
-    fun get(@PathVariable("id") id : Long) =
+    fun get(@PathVariable("id") id : String) =
             projectService.get(id)
 
     @PostMapping
     fun post(@RequestBody @Valid project: ProjectDto, bindingResult: BindingResult) : Project {
-
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             throw BadRequestException("message.error.badRequest", "Invalid parameters")
-        }
 
         return projectService.post(project)
     }
