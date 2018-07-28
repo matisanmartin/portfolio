@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("/projects")
 class ProjectController @Autowired constructor(
         private val projectService: ProjectService
 ){
@@ -26,6 +26,8 @@ class ProjectController @Autowired constructor(
 
         return projectService.post(project)
     }
+
+
 
 
 }
