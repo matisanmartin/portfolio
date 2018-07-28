@@ -1,6 +1,6 @@
 package com.matism.portfolio.model
 
-import java.util.*
+import java.util.UUID
 
 data class Project(var name: String) {
 
