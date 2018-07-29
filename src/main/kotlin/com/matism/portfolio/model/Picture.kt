@@ -1,5 +1,5 @@
 package com.matism.portfolio.model
 
-class Picture: Model() {
+class Picture: MongoModel() {
     var title : String = ""
 }

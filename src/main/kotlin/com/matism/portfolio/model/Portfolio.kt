@@ -1,5 +1,5 @@
 package com.matism.portfolio.model
 
-class Portfolio: Model() {
+class Portfolio: MongoModel() {
     var projects: List<Project> = mutableListOf()
 }

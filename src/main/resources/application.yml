@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: develop
+      host: localhost
+      port: 27017
+      username: develop
+      password: develop

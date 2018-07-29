@@ -1,6 +1,7 @@
 package com.matism.portfolio.service
 
 import com.matism.portfolio.dto.PictureDto
+import com.matism.portfolio.exception.ResourceNotFoundException
 import com.matism.portfolio.model.Picture
 import com.matism.portfolio.model.Project
 import com.matism.portfolio.repository.ProjectRepository
@@ -19,15 +20,16 @@ class PictureService @Autowired constructor(
 
     fun postPicturesToProject(projectId: String, pictures: List<PictureDto>): Project {
         LOGGER.info("Adding pictures to project")
-        var project = projectRepository.get(projectId)
+        var project = projectRepository.findById(projectId)
 
-        project.pictures.addAll(pictures.map {
+        project.orElseThrow { ResourceNotFoundException("message.error.resourceNotFound", "Project not found") }
+
+        project.get().pictures.addAll(pictures.map {
             var picture = Picture()
             picture.title = it.title
             picture
         })
 
-        projectRepository.put(project)
-        return project
+        return projectRepository.save(project.get())
     }
 }
