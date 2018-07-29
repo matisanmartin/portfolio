@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 class ProjectRepository {
 
     companion object {
-        val LOGGER: Logger = LoggerFactory.getLogger(javaClass)
+        val LOGGER: Logger = LoggerFactory.getLogger(ProjectRepository::class.java)
     }
 
     fun get(id: String) =

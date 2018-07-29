@@ -6,24 +6,26 @@ import com.matism.portfolio.service.PictureService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @RestController
 class PictureController @Autowired constructor(
         private val pictureService: PictureService
-) {
+) : AbstractController() {
 
     companion object {
-        val LOGGER: Logger = LoggerFactory.getLogger(javaClass)
+        val LOGGER: Logger = LoggerFactory.getLogger(PictureController::class.java)
     }
 
     @PostMapping("/projects/{projectId}/pictures/")
-    fun post(@PathVariable("projectId") projectId: String, @RequestBody pictureList: ListOfPicturesDto): Project {
-        LOGGER.info("POST on /project/{}/pictures", projectId);
+    fun post(@PathVariable("projectId") projectId: String, @RequestBody @Valid pictureList: ListOfPicturesDto, bindingResult: BindingResult): Project {
+        LOGGER.info("POST on /project/{}/pictures", projectId)
+        validateRequest(bindingResult)
         return pictureService.postPicturesToProject(projectId, pictureList.pictures)
-
     }
 }

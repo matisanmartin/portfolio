@@ -14,7 +14,7 @@ class PictureService @Autowired constructor(
         private val projectRepository: ProjectRepository
 ) {
     companion object {
-        val LOGGER: Logger = LoggerFactory.getLogger(javaClass)
+        val LOGGER: Logger = LoggerFactory.getLogger(PictureService::class.java)
     }
 
     fun postPicturesToProject(projectId: String, pictures: List<PictureDto>): Project {
