@@ -21,13 +21,11 @@ class PictureService @Autowired constructor(
         LOGGER.info("Adding pictures to project")
         var project = projectRepository.get(projectId)
 
-        var pictures = pictures.map {
+        project.pictures.addAll(pictures.map {
             var picture = Picture()
             picture.title = it.title
             picture
-        }
-
-        project.pictures.addAll(pictures)
+        })
 
         projectRepository.put(project)
         return project
