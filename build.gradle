@@ -48,5 +48,6 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
     compile("org.springframework:spring-aspects:5.0.8.RELEASE")
+    compile("org.springframework.data:spring-data-mongodb:2.0.9.RELEASE")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
