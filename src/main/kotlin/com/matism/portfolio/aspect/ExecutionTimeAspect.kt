@@ -17,7 +17,7 @@ class ExecutionTimeAspect {
         private val LOGGER: Logger = LoggerFactory.getLogger(ExecutionTimeAspect::class.java)
     }
 
-    @Around("@annotation(com.matism.portfolio.aspect.annotation.LoggableExecutionTime)")
+    @Around("@annotation(com.matism.portfolio.annotation.LoggableExecutionTime)")
     fun logExecutionTime(proceedingJoinPoint: ProceedingJoinPoint): Any {
         var starTime = System.currentTimeMillis()
         LOGGER.info("Beginning of method {}", getMethod(proceedingJoinPoint)?.name)

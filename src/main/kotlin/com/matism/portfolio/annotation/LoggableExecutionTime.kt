@@ -1,4 +1,4 @@
-package com.matism.portfolio.aspect.annotation
+package com.matism.portfolio.annotation
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FUNCTION)

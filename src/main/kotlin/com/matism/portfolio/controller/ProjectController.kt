@@ -1,6 +1,7 @@
 package com.matism.portfolio.controller
 
-import com.matism.portfolio.aspect.annotation.LoggableExecutionTime
+import com.matism.portfolio.annotation.LoggableExecutionTime
+import com.matism.portfolio.annotation.ValidateRequest
 import com.matism.portfolio.dto.ProjectDto
 import com.matism.portfolio.model.Project
 import com.matism.portfolio.service.ProjectService
@@ -13,7 +14,7 @@ import javax.validation.Valid
 @RequestMapping("/projects")
 class ProjectController @Autowired constructor(
         private val projectService: ProjectService
-) : AbstractController() {
+) {
 
     @GetMapping("{id}")
     @LoggableExecutionTime
@@ -21,8 +22,9 @@ class ProjectController @Autowired constructor(
             projectService.get(id)
 
     @PostMapping
+    @ValidateRequest
+    @LoggableExecutionTime
     fun post(@RequestBody @Valid project: ProjectDto, bindingResult: BindingResult): Project {
-        validateRequest(bindingResult)
         return projectService.post(project)
     }
 

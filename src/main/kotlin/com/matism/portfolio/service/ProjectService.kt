@@ -7,11 +7,13 @@ import com.matism.portfolio.model.Project
 import com.matism.portfolio.repository.ProjectRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
+import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.mongodb.repository.support.SimpleMongoRepository
 import org.springframework.stereotype.Service
 
 @Service
 class ProjectService @Autowired constructor(
-        val projectRepository: ProjectRepository
+        private val projectRepository: ProjectRepository
 ) {
 
     fun get(id: String): Project {
