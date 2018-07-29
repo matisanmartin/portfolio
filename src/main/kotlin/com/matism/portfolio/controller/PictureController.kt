@@ -18,13 +18,8 @@ class PictureController @Autowired constructor(
         private val pictureService: PictureService
 ) : AbstractController() {
 
-    companion object {
-        val LOGGER: Logger = LoggerFactory.getLogger(PictureController::class.java)
-    }
-
     @PostMapping("/projects/{projectId}/pictures/")
     fun post(@PathVariable("projectId") projectId: String, @RequestBody @Valid pictureList: ListOfPicturesDto, bindingResult: BindingResult): Project {
-        LOGGER.info("POST on /project/{}/pictures", projectId)
         validateRequest(bindingResult)
         return pictureService.postPicturesToProject(projectId, pictureList.pictures)
     }

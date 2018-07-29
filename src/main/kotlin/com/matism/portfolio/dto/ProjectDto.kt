@@ -11,4 +11,7 @@ class ProjectDto(
 
         var description: String
 ) {
+    override fun toString(): String {
+        return "{name:'$name', description:'$description'}"
+    }
 }

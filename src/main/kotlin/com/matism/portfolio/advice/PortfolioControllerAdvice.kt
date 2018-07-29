@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class PortfolioControllerAdvice {
 
     companion object {
-        val LOGGER = LoggerFactory.getLogger(PortfolioControllerAdvice::class.java)
+        private val LOGGER = LoggerFactory.getLogger(PortfolioControllerAdvice::class.java)
     }
 
     @ExceptionHandler(BadRequestException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun badRequestExceptionHandler(exception: BadRequestException): ErrorResponseDto {
-        LOGGER.error("badRequest", exception)
+        //LOGGER.error("badRequest", exception)
         return ErrorResponseDto(exception.errorKey, exception.message)
     }
 

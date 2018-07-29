@@ -8,4 +8,10 @@ class PictureDto {
     @field: NotNull
     @field: NotEmpty
     var title: String = ""
+
+    override fun toString(): String {
+        return "{title:'$title'}"
+    }
+
+
 }
