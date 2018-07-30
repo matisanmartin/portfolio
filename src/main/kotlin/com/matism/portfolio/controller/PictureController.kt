@@ -18,10 +18,10 @@ class PictureController @Autowired constructor(
         private val pictureService: PictureService
 ) {
 
-    @PostMapping("/projects/{projectId}/pictures/")
+    @PostMapping("/users/{userId}/projects/{projectId}/pictures/")
     @ValidateRequest
     @LoggableExecutionTime
-    fun post(@PathVariable("projectId") projectId: String, @RequestBody @Valid pictureList: ListOfPicturesDto, bindingResult: BindingResult): Project {
-        return pictureService.postPicturesToProject(projectId, pictureList.pictures)
+    fun post(@PathVariable("userId") userId: String, @PathVariable("projectId") projectId: String, @RequestBody @Valid pictureList: ListOfPicturesDto, bindingResult: BindingResult): Project {
+        return pictureService.postPicturesToProject(userId, projectId, pictureList.pictures)
     }
 }

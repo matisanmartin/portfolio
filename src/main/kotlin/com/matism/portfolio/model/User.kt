@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
 @Document(collection = "users")
-class User: MongoModel() {
+class User : MongoModel() {
 
     val creationDate: Date = Date()
 

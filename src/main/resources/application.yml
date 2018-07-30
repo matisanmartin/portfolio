@@ -6,3 +6,9 @@ spring:
       port: 27017
       username: develop
       password: develop
+
+paths:
+  images:
+    basePath: /data/
+    picturesPath: /pictures/
+    separator: /
