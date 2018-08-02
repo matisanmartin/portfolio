@@ -12,5 +12,18 @@ class User : MongoModel() {
     @Indexed(unique = true)
     var userName: String = ""
 
+    var dateOfBirth: Date? = null
+
+    var profilePicturePath: String = ""
+
+    var description: String = ""
+
     var portfolio: Portfolio = Portfolio()
+
+    var modificationDate: Date? = null
+
+    var deletionDate: Date? = null
+
+
+
 }
