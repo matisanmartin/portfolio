@@ -43,4 +43,34 @@ class UserService @Autowired constructor(
             throw UnprocessableEntityException("error.message.dataAccess", "Couldnt delete user")
         }
     }
+
+    fun followUser(currentUserId: String, userId: String): User {
+        if (currentUserId == userId)
+            throw UnprocessableEntityException("error.message.cantFollowItself", "A user cannot follow itself")
+
+        var user = findUser(currentUserId, "error.message.userDoesntExist", "Current user doesnt exist")
+        var userToBeFollowed = findUser(userId, "error.message.userDoesntExist", "Cannot follow non-existing user")
+
+        val userAlreadyFollows = user.following.any { it == currentUserId}
+
+        if(userAlreadyFollows)
+            throw UnprocessableEntityException("error.message.alreadyFollows", "User already follows the desired user")
+
+        user.following.add(userId)
+        userToBeFollowed.followers.add(currentUserId)
+
+        return user
+    }
+
+    fun unFollowUser(currentUserId: String, userId: String): User {
+        if (currentUserId == userId)
+            throw UnprocessableEntityException("error.messsage.cantUnFollowItself", "A user cannot unfollow itself")
+
+        var user = findUser(currentUserId, "error.message.userDoesntExist", "Cannot follow non-existing user")
+        var userToBeFollowed = findUser(userId, "error.message.userDoesntExist", "Cannot follow non-existing user")
+
+        return user
+    }
+
+    private fun findUser(userId: String, errorKey: String, errorMessage: String) = userRepository.findById(userId).orElseThrow { ResourceNotFoundException(errorKey, errorMessage) }
 }

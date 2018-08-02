@@ -24,6 +24,9 @@ class User : MongoModel() {
 
     var deletionDate: Date? = null
 
+    var following: MutableList<String> = mutableListOf()
+
+    var followers: MutableList<String> = mutableListOf()
 
 
 }

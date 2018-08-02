@@ -7,7 +7,7 @@ class ListOfPicturesDto {
 
     @field: NotEmpty
     @field: NotNull
-    var pictures: List<PictureDto> = mutableListOf()
+    var pictures: MutableList<PictureDto> = mutableListOf()
 
     override fun toString(): String {
         return "{pictures:$pictures}"

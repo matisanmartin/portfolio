@@ -17,27 +17,25 @@ class UserController @Autowired constructor(
 ) {
 
     @GetMapping("/{id}")
-    fun get(@PathVariable id: String): User {
-        return userService.get(id)
-    }
+    fun get(@PathVariable id: String): User = userService.get(id)
 
     @PostMapping
     @ValidateRequest
     @LoggableExecutionTime
-    fun post(@RequestBody @Valid user: UserDTO, bindingResult: BindingResult): User {
-        return userService.post(user)
-    }
+    fun post(@RequestBody @Valid user: UserDTO, bindingResult: BindingResult): User = userService.post(user)
 
     @PutMapping
     @ValidateRequest
     @LoggableExecutionTime
-    fun put(@RequestBody @Valid user: UserDTO, bindingResult: BindingResult): User {
-        return userService.put(user)
-    }
+    fun put(@RequestBody @Valid user: UserDTO, bindingResult: BindingResult): User = userService.put(user)
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: String) {
-        userService.delete(id)
-    }
+    fun delete(@PathVariable("id") id: String) = userService.delete(id)
 
+    @PutMapping("/{currentUserId}/followers/{userId}")
+    @LoggableExecutionTime
+    fun followUser(@PathVariable("currentUserId") currentUserId: String, @PathVariable("userId") userId: String): User = userService.followUser(currentUserId, userId)
+
+    @DeleteMapping("/{currentUserId}/followers/{userId}")
+    fun unFollowUser(@PathVariable("currentUserId") currentUserId: String, @PathVariable("userId") userId: String): User = userService.unFollowUser(currentUserId, userId)
 }

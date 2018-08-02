@@ -18,15 +18,12 @@ class ProjectController @Autowired constructor(
 
     @GetMapping("{id}")
     @LoggableExecutionTime
-    fun get(@PathVariable("id") id: String) =
-            projectService.get(id)
+    fun get(@PathVariable("id") id: String) = projectService.get(id)
 
     @PostMapping
     @ValidateRequest
     @LoggableExecutionTime
-    fun post(@RequestBody @Valid project: ProjectDto, bindingResult: BindingResult): Project {
-        return projectService.post(project)
-    }
+    fun post(@RequestBody @Valid project: ProjectDto, bindingResult: BindingResult): Project = projectService.post(project)
 
 
 }
