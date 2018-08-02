@@ -51,9 +51,9 @@ class UserService @Autowired constructor(
         var user = findUser(currentUserId, "error.message.userDoesntExist", "Current user doesnt exist")
         var userToBeFollowed = findUser(userId, "error.message.userDoesntExist", "Cannot follow non-existing user")
 
-        val userAlreadyFollows = user.following.any { it == currentUserId}
+        val userAlreadyFollows = findIfUserIsInFollowingList(user, userId)
 
-        if(userAlreadyFollows)
+        if (userAlreadyFollows)
             throw UnprocessableEntityException("error.message.alreadyFollows", "User already follows the desired user")
 
         user.following.add(userId)
@@ -67,10 +67,21 @@ class UserService @Autowired constructor(
             throw UnprocessableEntityException("error.messsage.cantUnFollowItself", "A user cannot unfollow itself")
 
         var user = findUser(currentUserId, "error.message.userDoesntExist", "Cannot follow non-existing user")
-        var userToBeFollowed = findUser(userId, "error.message.userDoesntExist", "Cannot follow non-existing user")
+        var userToBeUnFollowed = findUser(userId, "error.message.userDoesntExist", "Cannot follow non-existing user")
+
+        val userAlreadyFollows = findIfUserIsInFollowingList(user, userId)
+
+        if(!userAlreadyFollows)
+            throw UnprocessableEntityException("error.message.cannotUnFollow", "Cannot unfollow user cause it wasnt in followers")
+
+        user.following.remove(userId)
+        userToBeUnFollowed.followers.remove(currentUserId)
 
         return user
     }
+
+    fun findIfUserIsInFollowingList(user: User, userId: String) =
+            user.following.any { it == userId }
 
     private fun findUser(userId: String, errorKey: String, errorMessage: String) = userRepository.findById(userId).orElseThrow { ResourceNotFoundException(errorKey, errorMessage) }
 }
